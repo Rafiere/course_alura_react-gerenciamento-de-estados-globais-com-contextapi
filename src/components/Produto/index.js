@@ -9,7 +9,8 @@ import { CarrinhoContext, useCarrinhoContext } from "common/context/Carrinho";
 /* A responsabilidade do componente é apenas renderizar. Ele não precisa saber, por exemplo, como adicionar um produto. Essa responsabilidade foi passada diretamente pelo "useCarrinhoContext". */
 
 function Produto({ nome, foto, id, valor, unidade }) {
-  const { carrinho, setCarrinho, adicionarProdutos } = useCarrinhoContext();
+  const { carrinho, setCarrinho, adicionarProdutos, removerProdutos } =
+    useCarrinhoContext();
 
   const produtoNoCarrinho = carrinho.find(
     (itemDoCarrinho) => itemDoCarrinho.id === id
@@ -24,12 +25,13 @@ function Produto({ nome, foto, id, valor, unidade }) {
         </p>
       </div>
       <div>
-        <IconButton color="secondary">
+        <IconButton color="secondary" onClick={() => removerProdutos(id)}>
           <RemoveIcon />
         </IconButton>
         {/* Se existir algum produto no carrinho, será exibida a quantidade desse produto. Se não existir, será exibido o valor "0". */}
         {produtoNoCarrinho?.quantidade || 0}
         <IconButton
+          color="primary"
           onClick={() => adicionarProdutos({ nome, foto, id, valor })}
         >
           <AddIcon />
