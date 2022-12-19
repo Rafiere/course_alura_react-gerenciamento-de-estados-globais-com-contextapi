@@ -1,28 +1,28 @@
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import { StylesProvider } from '@material-ui/core/styles';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Login from 'pages/Login';
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { StylesProvider } from "@material-ui/core/styles";
+import React from "react";
+import ReactDOM from "react-dom";
+import Router from "routes";
+import "./index.css";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2A9F85'
+      main: "#2A9F85",
     },
     secondary: {
-      main: '#FF7070'
+      main: "#FF7070",
     },
-  }
-})
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <Login />
+        <Router />
       </ThemeProvider>
     </StylesProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
