@@ -5,6 +5,8 @@ import Login from "pages/Login";
 import Feira from "pages/Feira";
 import Carrinho from "pages/Carrinho";
 
+import { UsuarioContext } from "common/context/Usuario";
+
 const Router = () => {
   const [nome, setNome] = useState("");
   const [saldo, setSaldo] = useState(0);
@@ -13,12 +15,13 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Login
-            nome={nome}
-            setNome={setNome}
-            saldo={saldo}
-            setSaldo={setSaldo}
-          />
+          {/* Dentro do "UsuarioContext.Provider", precisamos do componente que utilizará esse contexto. */}
+
+          {/* Estamos passando essas props através do contexto. */}
+
+          <UsuarioContext.Provider value={{ nome, setNome, saldo, setSaldo }}>
+            <Login />
+          </UsuarioContext.Provider>
         </Route>
 
         <Route path="/feira">
