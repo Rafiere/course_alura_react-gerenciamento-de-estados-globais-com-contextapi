@@ -1,32 +1,27 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import React, { useState } from "react";
+import React from "react";
 import Login from "pages/Login";
 import Feira from "pages/Feira";
 import Carrinho from "pages/Carrinho";
 
-import { UsuarioContext } from "common/context/Usuario";
+import { UsuarioProvider } from "common/context/Usuario";
 
 const Router = () => {
-  const [nome, setNome] = useState("");
-  const [saldo, setSaldo] = useState(0);
-
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          {/* Dentro do "UsuarioContext.Provider", precisamos do componente que utilizará esse contexto. */}
-
-          {/* Estamos passando essas props através do contexto. */}
-
-          <UsuarioContext.Provider value={{ nome, setNome, saldo, setSaldo }}>
+        {/* Estamos compartilhando o contexto de "Usuário" para as rotas "/" e "/feira". */}
+        <UsuarioProvider>
+          <Route exact path="/">
+            {/* A rota de "login" terá acesso ao "UsuarioProvider", que será responsável por gerenciar os atributos que essa rota precisa para funcionar. */}
             <Login />
-          </UsuarioContext.Provider>
-        </Route>
+          </Route>
 
-        <Route path="/feira">
-          <Feira />
-        </Route>
+          <Route path="/feira">
+            <Feira />
+          </Route>
+        </UsuarioProvider>
 
         <Route path="/carrinho">
           <Carrinho />
